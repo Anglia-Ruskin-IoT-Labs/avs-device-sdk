@@ -177,7 +177,7 @@ std::pair<std::unique_ptr<AVSDirective>, AVSDirective::ParseStatus> AVSDirective
     result.second = ParseStatus::SUCCESS;
     //CHANGED!!
     ofstream myfile;
-    myfile.open ("/home/pi/AVS-incomingDirectives.txt", std::ios_base::app);
+    myfile.open ("/home/pi/logs/AVS-Directives.txt", std::ios_base::app);
     myfile << unparsedDirective;
     myfile << "\n";
     myfile << "\n";
