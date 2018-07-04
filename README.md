@@ -2,6 +2,13 @@
 
 Thats it, basically. ONLY WORKS on LINUX WITH USERNAME "pi"!! I'll change hardcoded stuff on further development.
 
+Changed files from original: 
+
+CapabilityAgents/SpeechSynthetizer changed, incoming audio responses and messageIDs
+AVSCommon/AVS/src/AVSDirective changed, incoming json payloads
+AVSCommon/AVS/src/MessageRequest changed, incoming json payload?? maybe unnecessary
+AVSCommon/AVS/src/EventBuilder changed, outgoing requests
+
 ### What is the Alexa Voice Service (AVS)?
 
 The Alexa Voice Service (AVS) enables developers to integrate Alexa directly into their products, bringing the convenience of voice control to any connected device. AVS provides developers with access to a suite of resources to quickly and easily build Alexa-enabled products, including APIs, hardware development kits, software development kits, and documentation.
