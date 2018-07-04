@@ -19,6 +19,13 @@
 
 #include <rapidjson/document.h>
 
+#include <rapidjson/writer.h>
+#include <rapidjson/stringbuffer.h>
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 namespace alexaClientSDK {
 namespace avsCommon {
 namespace avs {
@@ -129,7 +136,7 @@ static std::shared_ptr<AVSMessageHeader> parseHeader(const Document& document, A
     if (it != headerIt->value.MemberEnd()) {
         convertToValue(it->value, &avsDialogRequestId);
     }
-
+    
     return std::make_shared<AVSMessageHeader>(avsNamespace, avsName, avsMessageId, avsDialogRequestId);
 }
 
@@ -168,6 +175,14 @@ std::pair<std::unique_ptr<AVSDirective>, AVSDirective::ParseStatus> AVSDirective
     const std::string& attachmentContextId) {
     std::pair<std::unique_ptr<AVSDirective>, ParseStatus> result;
     result.second = ParseStatus::SUCCESS;
+    //CHANGED!!
+    ofstream myfile;
+    myfile.open ("/home/pi/AVS-incomingDirectives.txt", std::ios_base::app);
+    myfile << unparsedDirective;
+    myfile << "\n";
+    myfile << "\n";
+    myfile.close();
+
 
     Document document;
     if (!parseDocument(unparsedDirective, &document)) {

@@ -16,6 +16,10 @@
 #include "AVSCommon/AVS/MessageRequest.h"
 #include "AVSCommon/Utils/Logger/Logger.h"
 
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 namespace alexaClientSDK {
 namespace avsCommon {
 namespace avs {
@@ -53,6 +57,13 @@ void MessageRequest::addAttachmentReader(
 }
 
 std::string MessageRequest::getJsonContent() {
+    //CHANGED !!
+    ofstream myfile;
+    myfile.open("/home/pi/logs/AVS-messageRequest.txt", std::ios_base::app);
+    myfile << m_jsonContent;
+    myfile << "\n";
+    myfile << "\n";
+    myfile.close();
     return m_jsonContent;
 }
 

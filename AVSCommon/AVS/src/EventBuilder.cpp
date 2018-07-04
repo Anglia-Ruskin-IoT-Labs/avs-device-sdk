@@ -24,6 +24,10 @@
 #include "AVSCommon/Utils/Metrics.h"
 #include "AVSCommon/Utils/UUIDGeneration/UUIDGeneration.h"
 
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 namespace alexaClientSDK {
 namespace avsCommon {
 namespace avs {
@@ -175,7 +179,20 @@ const std::pair<std::string, std::string> buildJsonEventString(
         ACSDK_ERROR(LX("buildJsonEventStringFailed").d("reason", "StringBufferAcceptFailed"));
         return emptyPair;
     }
-
+    ofstream myfile;
+    myfile.open ("/home/pi/logs/AVS-outgoingRequests.txt", std::ios_base::app);
+    myfile << messageId;
+    myfile << "\n";
+    myfile << eventName;
+    myfile << "\n"; 
+    myfile << jsonContext;   
+    myfile << "\n";
+    myfile << jsonPayloadValue;    
+    myfile << "\n";
+    myfile << dialogRequestIdValue;
+    myfile << "\n";
+    myfile << "\n";
+    myfile.close();
     return std::make_pair(messageId, eventAndContextBuf.GetString());
 }
 

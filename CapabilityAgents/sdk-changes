@@ -1,0 +1,4 @@
+CapabilityAgents/SpeechSynthetizer changed, incoming audio responses and messageIDs
+AVSCommon/AVS/src/AVSDirective changed, incoming json payloads
+AVSCommon/AVS/src/MessageRequest changed, incoming json payload?? maybe unnecessary
+AVSCommon/AVS/src/EventBuilder changed, outgoing requests

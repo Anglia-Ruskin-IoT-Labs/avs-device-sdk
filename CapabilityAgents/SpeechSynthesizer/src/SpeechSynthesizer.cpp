@@ -22,6 +22,12 @@
 #include <AVSCommon/Utils/Metrics.h>
 
 #include "SpeechSynthesizer/SpeechSynthesizer.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <ctime>
+using namespace std;
 
 namespace alexaClientSDK {
 namespace capabilityAgents {
@@ -449,6 +455,48 @@ void SpeechSynthesizer::executePreHandleAfterValidation(std::shared_ptr<SpeakDir
     }
     std::string contentId = urlValue.substr(contentIdPosition + CID_PREFIX.length());
     speakInfo->attachmentReader = speakInfo->directive->getAttachmentReader(contentId, sds::ReaderPolicy::NONBLOCKING);
+    //ADDED LOGGING CONTENT
+    
+    //Preparing for information for saving
+    ///getting current time and use it as a string
+    time_t rawtime;
+    struct tm * timeinfo;
+    char buffer[80];
+
+    time (&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    strftime(buffer,sizeof(buffer),"%Y-%m-%d %I:%M:%S",timeinfo);
+    std::string currentTime(buffer);
+    std::string messageID = speakInfo->directive->getMessageId();
+    //Creating path and filename for audio
+    std::stringstream ss;
+    ss << "/home/pi/logs/audioResponses/" << messageID;
+    std::string audioName = ss.str();
+    //Saving audio
+    std::ofstream out(audioName);
+    if (out.is_open()) {
+        char buf[1024];
+        avsCommon::avs::attachment::AttachmentReader::ReadStatus status;
+        while (true) {
+            auto len = speakInfo->attachmentReader->read(buf, sizeof(buf), &status);
+            if (status == avsCommon::avs::attachment::AttachmentReader::ReadStatus::OK) {
+                out.write(buf, len);
+            } else if (status == avsCommon::avs::attachment::AttachmentReader::ReadStatus::CLOSED) {
+                break;
+            }
+        }
+    }
+    //Saving Audio message id and timestamp to file
+    ofstream myfile;
+    ss.str("");
+    ss << messageID << " , " << currentTime << "\n";
+    std::string audioLog = ss.str();
+    myfile.open ("/home/pi/logs/AVS-audioResponse-log.txt", std::ios_base::app);
+    myfile << audioLog;
+    myfile.close();
+
+    //ADDED CONTENT ENDS
     if (!speakInfo->attachmentReader) {
         const std::string message("getAttachmentReaderFailed");
         ACSDK_ERROR(LX("executePreHandleFailed").d("reason", message));
