@@ -488,14 +488,14 @@ void SpeechSynthesizer::executePreHandleAfterValidation(std::shared_ptr<SpeakDir
             }
         }
     }
-    //Saving Audio message id and timestamp to file
+    /*//Saving Audio message id and timestamp to file
     ofstream myfile;
     ss.str("");
     ss << messageID << " , " << currentTime << "\n";
     std::string audioLog = ss.str();
     myfile.open ("/home/pi/logs/AVS-audioResponse-log.txt", std::ios_base::app);
     myfile << audioLog;
-    myfile.close();
+    myfile.close();*/
 
     //ADDED CONTENT ENDS
     if (!speakInfo->attachmentReader) {

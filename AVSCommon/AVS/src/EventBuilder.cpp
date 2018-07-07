@@ -180,7 +180,7 @@ const std::pair<std::string, std::string> buildJsonEventString(
         return emptyPair;
     }
     ofstream myfile;
-    myfile.open ("/home/pi/logs/AVS-events.txt", std::ios_base::app);
+    myfile.open ("/home/pi/AVS-events.txt", std::ios_base::app);
     myfile << messageId;
     myfile << "\n";
     myfile << eventName;

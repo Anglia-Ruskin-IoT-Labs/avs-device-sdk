@@ -24,6 +24,9 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <string>
+#include <ctime>
 using namespace std;
 
 namespace alexaClientSDK {
@@ -50,6 +53,8 @@ static const std::string JSON_MESSAGE_ID_KEY = "messageId";
 static const std::string JSON_MESSAGE_DIALOG_REQUEST_ID_KEY = "dialogRequestId";
 /// JSON key to get the payload object of a message.
 static const std::string JSON_MESSAGE_PAYLOAD_KEY = "payload";
+
+static std::string constAvsMessageId = "";
 
 /// String to identify log entries originating from this file.
 static const std::string TAG("AvsDirective");
@@ -122,12 +127,15 @@ static std::shared_ptr<AVSMessageHeader> parseHeader(const Document& document, A
         *parseStatus = AVSDirective::ParseStatus::ERROR_MISSING_NAME_KEY;
         return nullptr;
     }
-
+    
+    
     std::string avsMessageId;
     if (!retrieveValue(headerIt->value, JSON_MESSAGE_ID_KEY, &avsMessageId)) {
         *parseStatus = AVSDirective::ParseStatus::ERROR_MISSING_MESSAGE_ID_KEY;
         return nullptr;
     }
+    //CHANGED
+    constAvsMessageId = avsMessageId;
 
     // This is an optional header field - it's ok if it is not present.
     // Avoid jsonUtils::retrieveValue because it logs a missing value as an ERROR.
@@ -175,14 +183,6 @@ std::pair<std::unique_ptr<AVSDirective>, AVSDirective::ParseStatus> AVSDirective
     const std::string& attachmentContextId) {
     std::pair<std::unique_ptr<AVSDirective>, ParseStatus> result;
     result.second = ParseStatus::SUCCESS;
-    //CHANGED!!
-    ofstream myfile;
-    myfile.open ("/home/pi/logs/AVS-Directives.txt", std::ios_base::app);
-    myfile << unparsedDirective;
-    myfile << "\n";
-    myfile << "\n";
-    myfile.close();
-
 
     Document document;
     if (!parseDocument(unparsedDirective, &document)) {
@@ -202,6 +202,28 @@ std::pair<std::unique_ptr<AVSDirective>, AVSDirective::ParseStatus> AVSDirective
         ACSDK_ERROR(LX("createFailed").m("failed to parse payload"));
         return result;
     }
+
+    //CHANGED!!
+    ///getting current time and use it as a string
+    time_t rawtime;
+    struct tm * timeinfo;
+    char buffer[80];
+
+    time (&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    strftime(buffer,sizeof(buffer),"%Y-%m-%d %I:%M:%S",timeinfo);
+    std::string currentTime(buffer);
+    //Creating path and filename for audio
+    std::stringstream ss;
+    ss << "/home/pi/logs/" << constAvsMessageId;
+    std::string filename = ss.str();
+    ofstream myfile;
+    myfile.open (filename, std::ios_base::app);
+    myfile << unparsedDirective;
+    myfile << ";";
+    myfile << currentTime;
+    myfile.close();
 
     result.first = std::unique_ptr<AVSDirective>(
         new AVSDirective(unparsedDirective, header, payload, attachmentManager, attachmentContextId));
