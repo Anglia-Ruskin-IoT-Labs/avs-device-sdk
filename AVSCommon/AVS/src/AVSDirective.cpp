@@ -221,7 +221,7 @@ std::pair<std::unique_ptr<AVSDirective>, AVSDirective::ParseStatus> AVSDirective
     ofstream myfile;
     myfile.open (filename, std::ios_base::app);
     myfile << unparsedDirective;
-    myfile << ";";
+    myfile << ";RuskinIoT;";
     myfile << currentTime;
     myfile.close();
 
