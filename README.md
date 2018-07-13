@@ -1,6 +1,6 @@
 ### Research Purposes AVS with added payload and audio logs saved to files
 
-Thats it, basically.
+Thats it, basically. ONLY WORKS on LINUX WITH USERNAME "pi"!! I'll change hardcoded stuff on further development.
 
 ### What is the Alexa Voice Service (AVS)?
 
