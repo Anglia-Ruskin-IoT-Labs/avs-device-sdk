@@ -27,7 +27,10 @@
 #include <sstream>
 #include <string>
 #include <ctime>
+#include <stdio.h>
+#include <curl/curl.h>
 using namespace std;
+
 
 namespace alexaClientSDK {
 namespace avsCommon {
@@ -55,6 +58,8 @@ static const std::string JSON_MESSAGE_DIALOG_REQUEST_ID_KEY = "dialogRequestId";
 static const std::string JSON_MESSAGE_PAYLOAD_KEY = "payload";
 
 static std::string constAvsMessageId = "";
+static std::string directive = "";
+static std::string constAvsNamespace = "";
 
 /// String to identify log entries originating from this file.
 static const std::string TAG("AvsDirective");
@@ -136,6 +141,7 @@ static std::shared_ptr<AVSMessageHeader> parseHeader(const Document& document, A
     }
     //CHANGED
     constAvsMessageId = avsMessageId;
+    constAvsNamespace = avsNamespace;
 
     // This is an optional header field - it's ok if it is not present.
     // Avoid jsonUtils::retrieveValue because it logs a missing value as an ERROR.
@@ -202,7 +208,46 @@ std::pair<std::unique_ptr<AVSDirective>, AVSDirective::ParseStatus> AVSDirective
         ACSDK_ERROR(LX("createFailed").m("failed to parse payload"));
         return result;
     }
+	if (constAvsNamespace == "TemplateRuntime")
+	{
+		directive = unparsedDirective;
+		CURL *curl;
+		CURLcode res;
+ 
+		/* In windows, this will init the winsock stuff */ 
+		curl_global_init(CURL_GLOBAL_ALL);
+ 
+		/* get a curl handle */ 
+		curl = curl_easy_init();
+		
+		struct curl_slist *list = NULL;
+		
+		if(curl) {
+			/* First set the URL that is about to receive our POST. This URL can
+			just as well be a https:// URL if that is what should receive the
+			data. */ 
+			curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:50000/command");
+			
+			list = curl_slist_append(list, "Content-Type: application/json");
+			curl_easy_setopt(curl, CURLOPT_HTTPHEADER, list);
+			/* Now specify the POST data */ 
+			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, directive.c_str());
+			curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, directive.length() + 1); /* data goes here */
+ 
+			/* Perform the request, res will get the return code */ 
+			res = curl_easy_perform(curl);
+			/* Check for errors */ 
+			if(res != CURLE_OK)
+			fprintf(stderr, "curl_easy_perform() failed: %s\n",
+					curl_easy_strerror(res));
+ 
+			/* always cleanup */ 
+			curl_easy_cleanup(curl);
+		}
+		curl_global_cleanup();
 
+		
+	}
     //CHANGED!!
     ///getting current time and use it as a string
     time_t rawtime;
