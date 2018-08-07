@@ -1,0 +1,5 @@
+flask
+requests
+socket
+smtplib
+configparser
