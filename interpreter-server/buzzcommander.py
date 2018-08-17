@@ -7,13 +7,13 @@ import threading
 
 class Buzzbox():
 	# Constructor, saving constants
-	def main(self, _ip, _port, _light, _led):
+	def main(self, _ip: str, _port: int, _light: int, _led: int):
 		self.BUZZBOX_IP = _ip
 		self.BUZZBOX_PORT = int(_port)
 		self.LEDNUM = int(_led)
 		self.LIGHTNUM = int(_light)
 		
-	def TextCleanup(self, _text):
+	def TextCleanup(self, _text: str) -> set:
 		''' Text formatting and cleanup
 		'''
 		text = _text.lower()
@@ -22,7 +22,7 @@ class Buzzbox():
 		text = text.split()
 		return set(text)
 		
-	def Command(self, _title, _text):
+	def Command(self, _title: str, _text:str) -> str:
 		""" Decision tree sends commands
 			to the BuzzBox based on the
 			input text. Returns string

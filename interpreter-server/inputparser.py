@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 
-def ParseYorN(_input):
-    """ Outputs a bool, True if
-        user has answered Yes.
-    """
+def ParseYorN(_input: str) -> bool:
+    """ True if user has answered Yes."""
     correct = False
     while not correct:
         _input = _input.lower()
@@ -15,6 +13,5 @@ def ParseYorN(_input):
             result = True
             correct = True
         else:
-            _input = input("Incorrect Input, please use Y or N: ")
-            
+            _input = input("Incorrect Input, please use Y or N: ")          
     return result

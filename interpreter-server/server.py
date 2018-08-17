@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+import os
+import sys
+# Change working directory of this scripts directory, if it is run from somewhere else
+os.chdir(os.path.dirname(os.path.realpath(sys.argv[0])))
+
 from flask import Flask, request, jsonify
 import json
 from threading import Thread
@@ -12,6 +17,7 @@ config = Config()
 # Fire up buzzbox controller
 buzzbox = Buzzbox(config.BuzzboxIP, config.BuzzboxPORT,
 				  config.BuzzboxLIGHTS, config.BuzzboxLEDS)
+# iMirror Controller
 mirror = IMirror(config.iMirrorIP, config.iMirrorPORT, config.iMirrorENDPOINT)
 # Fire up the Flask webserver
 app = Flask(__name__)
@@ -23,31 +29,26 @@ def CommandRouter(_json):
 		subtitle = payload["directive"]["payload"]["title"]["subTitle"]
 		mainTitle = payload["directive"]["payload"]["title"]["mainTitle"]
 		textField = payload["directive"]["payload"]["textField"]
-	except KeyError:
-		# Payload different than expected,
-		# Possibly not own skill
+	except KeyError:	# Payload different than expected, possibly not own skill.
 		subtitle = ""
 		mainTitle = ""
 		textField =  ""
-	# Call came from the right skill 
-	if mainTitle == "BuzzBox Command Centre":
-		thread = Thread(target = mirror.UpdateAlexaFrame, args = (mainTitle, textField, ))
+	if mainTitle == "BuzzBox Command Centre":				# Call came to the BuzzBox
+		thread = Thread(target = mirror.UpdateAlexaFrame,
+			args = (mainTitle, textField, ))
 		thread.start()
 		thread.join()
-		# Sends the command to the buzzbox
-		print (str(buzzbox.Command(mainTitle, textField)))		
+		print (str(buzzbox.Command(mainTitle, textField)))	# Sends the command to the buzzbox
 	elif mainTitle == "BuzzBox Information Centre":
-		thread = Thread(target = mirror.PrintReading, args = (buzzbox, mainTitle, textField, ))
+		thread = Thread(target = mirror.ShowReading, 
+			args = (buzzbox, mainTitle, textField, ))
 		thread.start()
 		thread.join()
-	elif mainTitle == "iMirror Command Centre":
+	elif mainTitle == "iMirror Command Centre":				# Call came to the iMirror
 		mirror.HandleCommand(mainTitle, textField)
-	# Json wasn't parsed
-	elif mainTitle == "":
+	elif mainTitle == "": 									# Json wasn't parsed
 		pass
-	# Json was parsed but it is not a special or implemented skill,
-	# just print
-	else:
+	else:													# Json parsed but sender skill unknown
 		mirror.UpdateAlexaFrame(mainTitle, textField)
 
 #test = Tests()
@@ -56,18 +57,16 @@ def CommandRouter(_json):
 
 @app.route('/command', methods=['POST'])
 def hello():
-	#Format raw json data
+	# Format raw json data
 	content = str(request.get_data())
 	content = content[2:-5]
 	content = content.replace("\\", "")
-	#start up a CommandRouter
+	# start up a CommandRouter
 	thread = Thread(target = CommandRouter, args = (content, ))
 	thread.start()
 	thread.join()
-	#print(content)
-	return 'Hello, World!'
+	return jsonify({'response': 'received'})
 
 
-# Running webserver
 app.run('localhost', 50000, threaded=True, debug=False)
 # Nothing runs below this line

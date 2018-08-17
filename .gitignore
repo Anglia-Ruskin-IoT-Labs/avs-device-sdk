@@ -5,3 +5,6 @@
 Integration/AuthDelegate.config
 #macOS specific files
 .DS_Store
+*__pycache__/
+/interpreter-server/__pycache__/
+.pyc
