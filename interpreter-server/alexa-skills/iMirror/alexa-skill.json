@@ -1,0 +1,190 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "imirror from anglia ruskin",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "CommandMirror",
+                    "slots": [
+                        {
+                            "name": "state",
+                            "type": "COMMANDS"
+                        },
+                        {
+                            "name": "item",
+                            "type": "ITEMS"
+                        }
+                    ],
+                    "samples": [
+                        "turn the {item} {state}",
+                        "turn {item} {state}",
+                        "{state} me the {item}",
+                        "{state} {item}"
+                    ]
+                },
+                {
+                    "name": "MoveWidget",
+                    "slots": [
+                        {
+                            "name": "item",
+                            "type": "ITEMS"
+                        },
+                        {
+                            "name": "position",
+                            "type": "POSITIONS"
+                        }
+                    ],
+                    "samples": [
+                        "move {item} widget to {position}",
+                        "move {item} widget to {position} position",
+                        "move {item} to {position} position",
+                        "move {item} to {position}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "COMMANDS",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "off"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "on"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "show"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "hide"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ITEMS",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "conversation"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "notifications"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "news"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "clock"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "time"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "weather"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "guide"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sensors"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "everything"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "POSITIONS",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "bottom right"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "bottom middle"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "bottom left"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "middle right"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "middle "
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "middle left"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "top right"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "top middle"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "top left"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

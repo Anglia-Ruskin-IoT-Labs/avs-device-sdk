@@ -1,13 +1,24 @@
-### Research Purposes AVS with added payload and audio logs saved to files
+# Research Purposes AVS with added payload and audio logs saved to files
 
-Thats it, basically. ONLY WORKS on LINUX WITH USERNAME "pi"!! I'll change hardcoded stuff on further development.
+Thats it, basically. ONLY WORKS on LINUX WITH USERNAME "pi"!! 
 
-Changed files from original: 
+I'll change hardcoded stuff on further development.
 
-CapabilityAgents/SpeechSynthetizer changed, incoming audio responses and messageIDs
-AVSCommon/AVS/src/AVSDirective changed, incoming json payloads
-AVSCommon/AVS/src/MessageRequest changed, incoming json payload?? maybe unnecessary
-AVSCommon/AVS/src/EventBuilder changed, outgoing requests
+Changed files from original alexa-device-sdk: 
+
+* CapabilityAgents/SpeechSynthetizer changed, incoming audio responses and messageIDs saved to **/home/pi/logs/audioResponses**
+* AVSCommon/AVS/src/AVSDirective changed, incoming json payloads, POSTs payload to **localhost:50000/command** and also saves it to **/home/pi/logs**
+
+## Install Process
+
+* Installation Guide on [Raspberry Pi](https://github.com/Floyd0122/avs-device-sdk/wiki/Raspberry-Pi-Guide)
+* Alexa Skills Setup [Here](https://github.com/Floyd0122/avs-device-sdk/wiki/Alexa-Skills-setup)
+
+
+
+------
+
+
 
 ### What is the Alexa Voice Service (AVS)?
 

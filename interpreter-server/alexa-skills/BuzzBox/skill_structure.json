@@ -1,0 +1,259 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "buzzbox from anglia ruskin",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "CommandTheBox",
+                    "slots": [
+                        {
+                            "name": "item",
+                            "type": "ITEMS"
+                        },
+                        {
+                            "name": "state",
+                            "type": "STATES"
+                        },
+                        {
+                            "name": "identifier",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "turn {item} {state}",
+                        "turn {item} {identifier} {state}",
+                        "turn the {item} {state}"
+                    ]
+                },
+                {
+                    "name": "GetState",
+                    "slots": [
+                        {
+                            "name": "item",
+                            "type": "ITEMS"
+                        },
+                        {
+                            "name": "identifier",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "show {item}",
+                        "show {item} {identifier} state",
+                        "show {item} state"
+                    ]
+                },
+                {
+                    "name": "Security",
+                    "slots": [
+                        {
+                            "name": "pass",
+                            "type": "PASSPHRASES"
+                        }
+                    ],
+                    "samples": [
+                        "the passphrase is {pass}",
+                        "the password is {pass}"
+                    ]
+                },
+                {
+                    "name": "AMAZON.MoreIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateSettingsIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NextIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PageUpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PageDownIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PreviousIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollRightIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollDownIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollLeftIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollUpIntent",
+                    "samples": []
+                }
+            ],
+            "types": [
+                {
+                    "name": "ITEMS",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "light"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "LED"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "fan"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "heater"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "everything"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "all LED's"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "all lights"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "reading display"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "reading interface"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "STATES",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "off"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "on"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "blink"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "green"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "red"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "yellow"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "STATE_ITEMS",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "LED"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "heater"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "light"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "fan"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "temperature"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "light sensor"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "motion sensor"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "PASSPHRASES",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "i hate alexa"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

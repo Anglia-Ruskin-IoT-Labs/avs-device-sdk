@@ -1,0 +1,144 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "zork from anglia ruskin",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "GiveCommand",
+                    "slots": [
+                        {
+                            "name": "replies",
+                            "type": "REPLIES"
+                        }
+                    ],
+                    "samples": [
+                        "{replies}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "REPLIES",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "go southwest"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "read leaflet"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "look at house"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "take boards"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "open door"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "go east"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "open mailbox"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "take mailbox"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "go west"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "go north"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "go south"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "descend grating"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "descend staircase"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "take skeleton"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "smash skeleton"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "light up room"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "break skeleton"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "go down staircase"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "scale staircase"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "open trunk"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
