@@ -2,13 +2,11 @@
 
 Logging ONLY WORKS on LINUX WITH USERNAME "pi"!!  (hardcoded path /home/pi)
 
-I'll change hardcoded stuff on further development.
-
 Changed files from original alexa-device-sdk: 
 
 * CapabilityAgents/SpeechSynthetizer changed, incoming audio responses and messageIDs saved to **/home/pi/logs/audioResponses**, then 
 * AVSCommon/AVS/src/AVSDirective changed, incoming json payloads, POSTs payload to **localhost:50000/command** (interpreter-server API endpoint) and also saves it to **/home/pi/logs**
-* **interpreter-server**, sends the commands to a BuzzBox or/and iMirror, if they are set up.
+* **interpreter-server**, receives RenderTemplate payloads from the SDK and sends the commands to a BuzzBox or/and iMirror, if they are set up. **Without this, Alexa cannot be used to control any of the devices!**
 
 ## Install Process
 
