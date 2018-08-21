@@ -13,6 +13,21 @@ Changed files from original alexa-device-sdk:
 * Installation Guide on [Raspberry Pi](https://github.com/Floyd0122/avs-device-sdk/wiki/Raspberry-Pi-Guide)
 * Alexa Skills Setup [Here](https://github.com/Floyd0122/avs-device-sdk/wiki/Alexa-Skills-setup)
 
+## Interpreter Server Structure
+
+```
+interpreter-server/
+	server.py - Starts the server up. contains initialised objects and API endpoints
+	inputparser.py - module for Y/N questions
+	config.py - Handles saving, loading and creating the config file
+	iMirror.py - Handles command interpretation and sends API calls for the iMirror
+	buzzcommander.py - Handles command interpretation and sends socket calls for the 							BuzzBox
+	alexa-skills/ - Alexa Skill structures and its lambda skills
+		iMirror/
+		BuzzBox/
+		Zork/
+```
+
 
 
 ------
